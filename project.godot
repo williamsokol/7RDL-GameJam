@@ -14,6 +14,10 @@ config/name="7drl-GameJam"
 run/main_scene="res://Scenes/GenerationTestRoom.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/gdscript/max_call_stack=2048
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
