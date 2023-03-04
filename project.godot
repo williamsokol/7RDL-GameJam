@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="7drl-GameJam"
+run/main_scene="res://Scenes/GenerationTestRoom.tscn"
 config/icon="res://icon.png"
 
 [gui]
