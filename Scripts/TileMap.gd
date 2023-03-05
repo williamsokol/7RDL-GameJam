@@ -25,15 +25,17 @@ func _ready():
 	grassGrid = RandomizedMap([-1,0])
 	for i in range(2):
 		grassGrid = CellularAutomata(grassGrid,-1)
+	#grassGrid = clearSingleTiles(grassGrid,0)
 	LoadGrid(grassGrid,layers[0])
 	layers[0].update_bitmask_region(Vector2.ZERO, mapTileSize)
 	
-	clearSingleTiles(grassGrid,0)
-	
 	# Create Trees on Grass
-	var treeGrid:Array
-	treeGrid = placeTrees(grassGrid,[-1,3])
-	LoadGrid(treeGrid,layers[2])
+
+	var treeGrids:Array
+	treeGrids = placeTrees(grassGrid,[3])
+	LoadGrid(treeGrids[0],layers[2])
+	LoadGrid(treeGrids[1],layers[3])
+	layers[2].update_bitmask_region(Vector2.ZERO, mapTileSize)
 	
 func RandomizedMap(tiles:Array):
 	var result = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,1)
@@ -73,18 +75,22 @@ func clearSingleTiles(tileGrid,targetTile):
 			if (tempGrid[x][y] == -1):
 				continue
 			if (layers[0].get_cell_autotile_coord(x,y)==Vector2.ZERO):
-				print(tempGrid[x][y])
 				tempGrid[x][y] = -1
 	return tempGrid
 	
 func placeTrees(tileGrid:Array,tiles:Array):
-	var result = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,1)
+	var trunkGrid = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,-1)
+	var leafGrid  = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,-1)
+	var result = [trunkGrid,leafGrid]
 	for x in mapTileSize.x:
 		for y in mapTileSize.y:
 			if (tileGrid[x][y] == -1):
 				continue
-			var cellType = tiles[randi()%tiles.size()]
-			result[x][y] = cellType
+			if(randi()%20 != 0):
+				continue
+			#var cellType = tiles[randi()%tiles.size()]
+			trunkGrid[x][y] = 3
+			leafGrid[x][y-1] = 4
 	return result
 func GetNeigborCount(tempGrid,x,y,targetTile):
 	var neighborCount = 0
