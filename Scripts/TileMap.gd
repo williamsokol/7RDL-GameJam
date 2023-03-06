@@ -8,6 +8,7 @@ extends Node2D
 var mapTileSize:Vector2
 #var refTileMap = get_child(0)
 var layers = []
+var Grids = {} #make a diction for grids
 #var rng = new Random.
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,28 +16,35 @@ func _ready():
 	randomize()
 	layers = get_children()
 	mapTileSize = get_viewport_rect().size/ layers[0].cell_size
-	
-	print(TileMap.INVALID_CELL)
-	
-	
+	CreateMap()
+#func _process(delta):
+#	if Input.is_action_just_pressed("Fire"):
+#		CreateMap()
+func CreateMap():
 	# Create patchy Grass on map
 	layers[0].clear()
-	var grassGrid:Array
-	grassGrid = RandomizedMap([-1,0])
+	Grids["grass"] = RandomizedMap([-1,0])
 	for i in range(2):
-		grassGrid = CellularAutomata(grassGrid,-1)
-	#grassGrid = clearSingleTiles(grassGrid,0)
-	LoadGrid(grassGrid,layers[0])
-	layers[0].update_bitmask_region(Vector2.ZERO, mapTileSize)
-	
-	# Create Trees on Grass
+		Grids["grass"] = CellularAutomata(Grids["grass"],-1)
 
+	# place Trees on Grass
 	var treeGrids:Array
-	treeGrids = placeTrees(grassGrid,[3])
-	LoadGrid(treeGrids[0],layers[2])
-	LoadGrid(treeGrids[1],layers[3])
-	layers[2].update_bitmask_region(Vector2.ZERO, mapTileSize)
+	treeGrids = placeTrees(Grids["grass"],[3])
+	Grids["treeTrunk"] = treeGrids[0]
+	Grids["treeLeafs"] = treeGrids[1]
 	
+	# Create some cabins 
+	for i in range(2):
+		var pos = Vector2(randi()% int(mapTileSize.x-10),randi()% int(mapTileSize.y-10))
+		CreateCabin([Grids["grass"],create_2d_array(mapTileSize.y+1,mapTileSize.x+1,-1)], pos,Vector2(8,8))
+	
+	# load all the grids into the game
+	LoadGrid(Grids["grass"],layers[0])
+	LoadGrid(Grids["treeTrunk"],layers[2])
+	LoadGrid(Grids["treeLeafs"],layers[3])
+	layers[0].update_bitmask_region(Vector2.ZERO, mapTileSize)
+	layers[2].update_bitmask_region(Vector2.ZERO, mapTileSize)
+
 func RandomizedMap(tiles:Array):
 	var result = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,1)
 	for x in mapTileSize.x:
@@ -92,6 +100,27 @@ func placeTrees(tileGrid:Array,tiles:Array):
 			trunkGrid[x][y] = 3
 			leafGrid[x][y-1] = 4
 	return result
+func CreateCabin(grids:Array,pos:Vector2,size:Vector2):
+	#grids[0] =  create_2d_array(mapTileSize.y+1,mapTileSize.x+1,-1)
+	#grids[1] =  create_2d_array(mapTileSize.y+1,mapTileSize.x+1,-1)
+	var result = grids
+	
+	
+	for i in size.x:
+		for j in size.y:
+			var x = i+pos.x
+			var y = j+pos.y
+			Grids["grass"][x][y] = 5
+			Grids["treeTrunk"][x][y] = -1
+			Grids["treeLeafs"][x][y-1] = -1
+			
+			if (randi()%10 == 0):
+				continue
+			if(i == 0 or i==size.x-1):
+				Grids["treeTrunk"][x][y] = 6
+			elif(j == 0 or j==size.y-1):
+				Grids["treeTrunk"][x][y] = 6
+	return result
 func GetNeigborCount(tempGrid,x,y,targetTile):
 	var neighborCount = 0
 	for i in range(x-1,x+2):
@@ -120,8 +149,8 @@ func create_2d_array(width, height, value):
 			a[y][x] = value
 
 	return a
+	
+
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	if Input.is_action_just_pressed("Fire"):
-#		grid = CellularAutomata(grid)
-#		LoadGrid(grid)
+
