@@ -1,21 +1,24 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
+var mapSize:Vector2
 var mapTileSize:Vector2
-#var refTileMap = get_child(0)
+
 var layers = []
 var Grids = {} #make a diction for grids
-#var rng = new Random.
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	yield(get_tree().root, "ready") # needed to make this the last ready() func called
 	randomize()
 	layers = get_children()
-	mapTileSize = get_viewport_rect().size/ layers[0].cell_size
+	mapSize = get_node("/root/LevelManager").mapSize
+	mapTileSize = mapSize/ layers[0].cell_size
+	
+	print(get_node("/root/LevelManager").mapSize)
+	
+	CreateMapBoarder()
 	CreateMap()
 #func _process(delta):
 #	if Input.is_action_just_pressed("Fire"):
@@ -52,8 +55,7 @@ func RandomizedMap(tiles:Array):
 			var cellType = tiles[randi()%tiles.size()]
 			result[x][y] = cellType
 	return result
-#func LoadCell(x,y):
-	
+
 # this function is the core idea
 func CellularAutomata(tileGrid,targetTile):
 	var result = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,1)
@@ -121,6 +123,18 @@ func CreateCabin(grids:Array,pos:Vector2,size:Vector2):
 			elif(j == 0 or j==size.y-1):
 				Grids["treeTrunk"][x][y] = 6
 	return result
+	
+func CreateMapBoarder():
+	var mapBounds = $StaticBody2D
+	var Vec2arr	=		[Vector2(0,0),Vector2(0,mapSize.y),mapSize,Vector2(mapSize.x,0)]
+	mapBounds.create_shape_owner(mapBounds)	
+	for i in range(4):
+		var a = SegmentShape2D.new()
+		a.a = Vec2arr[i]
+		a.b = Vec2arr[(i+1)%4]
+		mapBounds.shape_owner_add_shape(0,a)
+
+# Utility Scripts down here v
 func GetNeigborCount(tempGrid,x,y,targetTile):
 	var neighborCount = 0
 	for i in range(x-1,x+2):

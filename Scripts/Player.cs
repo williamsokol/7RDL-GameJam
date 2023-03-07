@@ -77,7 +77,7 @@ public class Player : KinematicBody2D
         {
             _velocity.y = ApplyDrag(ref _velocity.y);
         }
-        
+
         if (_inputVector.x == 0)
         {
             _velocity.x = ApplyDrag(ref _velocity.x);
@@ -94,7 +94,7 @@ public class Player : KinematicBody2D
 
     private float CalculateMouseAngle()
     {
-        _mouseDirection = GetViewport().GetMousePosition() - Position;
+        _mouseDirection = GetGlobalMousePosition() - Position;
 
         float angleRads = Mathf.Atan2(_mouseDirection.y, _mouseDirection.x);
         float angleDegs = Mathf.Rad2Deg(angleRads);
