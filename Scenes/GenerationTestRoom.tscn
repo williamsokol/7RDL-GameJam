@@ -1,16 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Art/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/TileMap.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=4]
-[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=5]
 
 [node name="LevelManager" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="TileMaps" type="Node2D" parent="."]
-scale = Vector2( 6, 6 )
 script = ExtResource( 2 )
 
 [node name="TileMap(Grass)" type="TileMap" parent="TileMaps"]
@@ -39,14 +36,3 @@ cell_size = Vector2( 16, 16 )
 format = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="TileMaps"]
-
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1000, 1000 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 1000, 1000 )
-current = true
-script = ExtResource( 5 )
-playerPath = NodePath("../Player")
-
-[editable path="Player"]
