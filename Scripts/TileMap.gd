@@ -24,6 +24,7 @@ func _ready():
 #	if Input.is_action_just_pressed("Fire"):
 #		CreateMap()
 func CreateMap():
+	Grids["sand"] = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,1)
 	# Create patchy Grass on map
 	layers[0].clear()
 	Grids["grass"] = RandomizedMap([-1,0])
@@ -43,6 +44,7 @@ func CreateMap():
 	
 	# load all the grids into the game
 	LoadGrid(Grids["grass"],layers[0])
+	LoadGrid(Grids["sand"],layers[1])
 	LoadGrid(Grids["treeTrunk"],layers[2])
 	LoadGrid(Grids["treeLeafs"],layers[3])
 	layers[0].update_bitmask_region(Vector2.ZERO, mapTileSize)
