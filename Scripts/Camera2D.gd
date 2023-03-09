@@ -5,14 +5,19 @@ extends Camera2D
 # var a = 2
 # var b = "text"
 export var playerPath:NodePath
+export var levelManagerPath:NodePath
 var player
 
 #var started = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	yield(get_tree().root, "ready")
 	player = get_node(playerPath)
-	var mapSize = get_node("/root/LevelManager").mapSize
+
+	var levelManager = get_node(levelManagerPath)
+	yield(levelManager, "ready")
+	var mapSize = levelManager.mapSize
+	
+
 	limit_left	=0
 	limit_right	=mapSize.x*6
 	limit_bottom=mapSize.y*6
@@ -24,5 +29,5 @@ func _ready():
 func _process(delta):
 #	if !started:
 #		return
-		
-	position = player.position
+	if player:
+		position = player.position

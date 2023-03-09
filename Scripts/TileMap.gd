@@ -1,7 +1,7 @@
 extends Node2D
 
 
-
+export var levelManagerPath:NodePath
 var mapSize:Vector2
 var mapTileSize:Vector2
 
@@ -10,13 +10,16 @@ var Grids = {} #make a diction for grids
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	yield(get_tree().root, "ready") # needed to make this the last ready() func called
+	var levelManager = get_node(levelManagerPath)
+	yield(levelManager, "ready") # needed to make this the last ready() func called
 	randomize()
 	layers = get_children()
-	mapSize = get_node("/root/LevelManager").mapSize
+	
+	
+	print("tilemaps loading")
+	mapSize = levelManager.mapSize
 	mapTileSize = mapSize/ layers[0].cell_size
 	
-	print(get_node("/root/LevelManager").mapSize)
 	
 	CreateMapBoarder()
 	CreateMap()

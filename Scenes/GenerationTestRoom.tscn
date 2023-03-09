@@ -10,8 +10,8 @@ script = ExtResource( 4 )
 mapSize = Vector2( 3072, 1800 )
 
 [node name="TileMaps" type="Node2D" parent="."]
-scale = Vector2( 6, 6 )
 script = ExtResource( 2 )
+levelManagerPath = NodePath("..")
 
 [node name="TileMap(Grass)" type="TileMap" parent="TileMaps"]
 tile_set = ExtResource( 1 )
