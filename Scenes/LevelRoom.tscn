@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Art/Tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/LevelGen/TileMap.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=4]
-[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/LevelGen/LevelManager.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/Gameplay/Camera2D.gd" type="Script" id=5]
 [ext_resource path="res://Art/Fonts/arialbd.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Scripts/Timer Label.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Gameplay/Timer Label.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.894118, 0.168627, 0.168627, 1 )
