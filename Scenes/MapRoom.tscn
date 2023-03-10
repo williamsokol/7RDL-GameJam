@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Art/MapArt/Map.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/MapManager.gd" type="Script" id=2]
+[ext_resource path="res://PreFabs/MapLocation.tscn" type="PackedScene" id=3]
+[ext_resource path="res://PreFabs/Path Line2D.tscn" type="PackedScene" id=4]
+
+[node name="MapManager" type="Node2D"]
+script = ExtResource( 2 )
+location = ExtResource( 3 )
+linePacked = ExtResource( 4 )
+
+[node name="Map Sprite" type="Sprite" parent="."]
+position = Vector2( 510, 298.75 )
+scale = Vector2( 0.706044, 0.621134 )
+texture = ExtResource( 1 )
+
+[node name="Path Line2D" parent="." instance=ExtResource( 4 )]
+visible = false
