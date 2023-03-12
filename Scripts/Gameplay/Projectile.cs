@@ -1,9 +1,10 @@
 using Godot;
 
-public class Projectile : KinematicBody2D
+public class Projectile : Area2D
 {
     [Export] private readonly float _moveSpeed;
 
+    [Export] public float damage;
     private Vector2 _moveDirection = Vector2.Zero;
 
     public void Init(Vector2 position, float rotation)
@@ -16,7 +17,7 @@ public class Projectile : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
-        MoveAndSlide(_moveDirection * _moveSpeed * GetPhysicsProcessDeltaTime());
+        Position += (_moveDirection * _moveSpeed * GetPhysicsProcessDeltaTime());
     }
 
     private void CalculateDirection()

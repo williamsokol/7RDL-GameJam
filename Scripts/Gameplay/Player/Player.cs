@@ -7,6 +7,9 @@ public class Player : KinematicBody2D
     [Export] private readonly float _drag;
     [Export] private readonly bool _debugInfo;
     [Export] private readonly PackedScene _projectile;
+    [Export] private float _hp;
+    [Export] public readonly float maxHp;
+
 
     // Debug Stuff
     private Label _velocityLabel;
@@ -14,21 +17,24 @@ public class Player : KinematicBody2D
     // -----------
 
     private Vector2 _inputVector = Vector2.Zero;
-    private Vector2 _velocity = Vector2.Zero;
+    public Vector2 velocity = Vector2.Zero;
     private Vector2 _mouseDirection = Vector2.Zero;
+    public float _mouseAngle;
 
     #region Godot Methods
     public override void _Ready()
     {
         _velocityLabel = GetNode<Label>("Debug/Velocity");
         _mouseLine = GetNode<Line2D>("Debug/MouseLine");
+
+        _hp = maxHp;
     }
 
     public override void _Process(float delta)
     {
         FetchInput();
         CalculateVelocity();
-        CalculateMouseAngle();
+        _mouseAngle = CalculateMouseAngle();
 
         ShowDebugInfo();
     }
@@ -54,13 +60,13 @@ public class Player : KinematicBody2D
         }
     }
 
-    private void HandleMovement() => MoveAndSlide(_velocity);
+    private void HandleMovement() => MoveAndSlide(velocity);
 
     private void FireProjectile()
     {
         Projectile p = _projectile.Instance<Projectile>();
 
-        p.Init(Position, CalculateMouseAngle());
+        p.Init(Position + (_mouseDirection.Normalized() * 10.0f), CalculateMouseAngle());
         GetTree().Root.AddChild(p);
     }
     #endregion
@@ -68,26 +74,26 @@ public class Player : KinematicBody2D
     #region Calculations
     private void CalculateVelocity()
     {
-        _velocity = new Vector2(Mathf.Clamp(_velocity.x, -_maxVelocity, _maxVelocity),
-            Mathf.Clamp(_velocity.y, -_maxVelocity, _maxVelocity));
+        velocity = new Vector2(Mathf.Clamp(velocity.x, -_maxVelocity, _maxVelocity),
+            Mathf.Clamp(velocity.y, -_maxVelocity, _maxVelocity));
 
-        _velocity += _inputVector.Normalized() * _acceleration * GetPhysicsProcessDeltaTime();
+        velocity += _inputVector.Normalized() * _acceleration * GetPhysicsProcessDeltaTime();
 
         if (_inputVector.y == 0)
         {
-            _velocity.y = ApplyDrag(ref _velocity.y);
+            velocity.y = ApplyDrag(ref velocity.y);
         }
 
         if (_inputVector.x == 0)
         {
-            _velocity.x = ApplyDrag(ref _velocity.x);
+            velocity.x = ApplyDrag(ref velocity.x);
         }
     }
 
     private float ApplyDrag(ref float coord)
     {
-        /*_velocity.x = Mathf.MoveToward(_velocity.x, 0.0f, _drag * GetProcessDeltaTime());
-        _velocity.y = Mathf.MoveToward(_velocity.y, 0.0f, _drag * GetProcessDeltaTime());*/
+        /*velocity.x = Mathf.MoveToward(velocity.x, 0.0f, _drag * GetProcessDeltaTime());
+        velocity.y = Mathf.MoveToward(velocity.y, 0.0f, _drag * GetProcessDeltaTime());*/
 
         return Mathf.MoveToward(coord, 0.0f, _drag * GetProcessDeltaTime());
     }
@@ -108,7 +114,20 @@ public class Player : KinematicBody2D
     {
         if (!_debugInfo) return;
 
-        _velocityLabel.Text = "Velocity: " + _velocity.ToString("0.0");
-        _mouseLine.SetPointPosition(1, _mouseDirection.Normalized() * 100.0f);
+        _velocityLabel.Text = "Velocity: " + velocity.ToString("0.0");
+        _mouseLine.SetPointPosition(1, _mouseDirection.Normalized() * 10.0f);
+    }
+    // public void AimGun()
+    // {
+
+    //     _mouseAngle
+    // }
+    public void reciveDmg(float dmg)
+    {
+        _hp = _hp - dmg;
+        if (_hp <= 0)
+        {
+            LevelManager.GameOver();
+        }
     }
 }

@@ -19,8 +19,8 @@ func _ready():
 	
 
 	limit_left	=0
-	limit_right	=mapSize.x*6
-	limit_bottom=mapSize.y*6
+	limit_right	=mapSize.x
+	limit_bottom=mapSize.y
 	limit_top	=0
 	pass # Replace with function body.
 #	started = true

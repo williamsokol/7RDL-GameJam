@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Art/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/LevelGen/TileMap.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://PreFabs/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/LevelGen/LevelManager.cs" type="Script" id=4]
 [ext_resource path="res://Scripts/Gameplay/Camera2D.gd" type="Script" id=5]
 [ext_resource path="res://Art/Fonts/arialbd.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Scripts/Gameplay/Timer Label.gd" type="Script" id=7]
+[ext_resource path="res://PreFabs/Enemy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Gameplay/Player/HP ProgressBar.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Gameplay/Enemies/EnemyManager.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.894118, 0.168627, 0.168627, 1 )
@@ -36,7 +39,6 @@ script = ExtResource( 4 )
 countDownDuration = 5
 
 [node name="TileMaps" type="Node2D" parent="."]
-scale = Vector2( 6, 6 )
 script = ExtResource( 2 )
 levelManagerPath = NodePath("..")
 
@@ -44,6 +46,7 @@ levelManagerPath = NodePath("..")
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 show_collision = true
+bake_navigation = true
 format = 1
 
 [node name="TileMap2(Sand)" type="TileMap" parent="TileMaps"]
@@ -68,11 +71,22 @@ format = 1
 [node name="StaticBody2D" type="StaticBody2D" parent="TileMaps"]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1000, 1000 )
+position = Vector2( 120, 183 )
+__meta__ = {
+"_edit_group_": true
+}
+_maxVelocity = 50.0
+
+[node name="AnimatedSprite" parent="Player" index="0"]
+frame = 4
+
+[node name="Gun Sprite" parent="Player" index="3"]
+rotation = 2.7646
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1000, 1000 )
 current = true
+zoom = Vector2( 0.166, 0.166 )
 script = ExtResource( 5 )
 playerPath = NodePath("../Player")
 levelManagerPath = NodePath("..")
@@ -94,6 +108,8 @@ custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 value = 60.0
 percent_visible = false
+script = ExtResource( 9 )
+playerPath = NodePath("../../../Player")
 
 [node name="Timer Label" type="Label" parent="CanvasLayer/UI Control"]
 anchor_left = 0.5
@@ -106,5 +122,19 @@ align = 1
 valign = 1
 script = ExtResource( 7 )
 levelManagerPath = NodePath("../../..")
+
+[node name="EnemyManager Node2D" type="Node2D" parent="."]
+script = ExtResource( 10 )
+playerPath = NodePath("../Player")
+enemy = ExtResource( 8 )
+
+[node name="Enemy KinematicBody2D" parent="EnemyManager Node2D" instance=ExtResource( 8 )]
+position = Vector2( 453, 289 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Timer" type="Timer" parent="EnemyManager Node2D"]
+autostart = true
 
 [editable path="Player"]

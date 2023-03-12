@@ -1,0 +1,130 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Scripts/Gameplay/Player/Player.cs" type="Script" id=1]
+[ext_resource path="res://PreFabs/Projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Gameplay/Player/Gun Sprite.gd" type="Script" id=3]
+[ext_resource path="res://Art/Units/WeaponLess_SpreiteSheet.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Gameplay/Player/PlayerAnimator.gd" type="Script" id=5]
+[ext_resource path="res://Art/Units/Pistol.png" type="Texture" id=6]
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 80, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 112, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 4 )
+region = Rect2( 144, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 4 )
+region = Rect2( 176, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 4 )
+region = Rect2( 144, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 28 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 28 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "Down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "Side",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 11 ), SubResource( 12 ), SubResource( 10 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "Up",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 4 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+_acceleration = 800.0
+_maxVelocity = 300.0
+_drag = 500.0
+_debugInfo = true
+_projectile = ExtResource( 2 )
+maxHp = 80.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 6 )
+animation = "Down"
+playing = true
+script = ExtResource( 5 )
+playerPath = NodePath("..")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2.5 )
+shape = SubResource( 1 )
+
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="Velocity" type="Label" parent="Debug"]
+visible = false
+margin_left = -29.0
+margin_top = -54.0
+margin_right = 79.0
+margin_bottom = -36.0
+text = "Velocity: "
+valign = 1
+
+[node name="MouseLine" type="Line2D" parent="Debug"]
+visible = false
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 1.0
+default_color = Color( 0.65098, 0.141176, 0.737255, 1 )
+
+[node name="Gun Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 6 )
+script = ExtResource( 3 )
+distFromPlayer = 5.0
+playerPath = NodePath("..")

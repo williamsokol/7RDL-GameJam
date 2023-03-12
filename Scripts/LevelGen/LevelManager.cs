@@ -10,6 +10,8 @@ public class LevelManager : Node2D
     [Export]
     public string countDownTime;
 
+    public static bool levelWon = false;
+
     float startingTime;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -23,6 +25,10 @@ public class LevelManager : Node2D
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
+        if (levelWon == true)
+        {
+            return;
+        }
         float timesec = ((Time.GetTicksMsec() - startingTime) / 1000);
         float countDown = (countDownDuration - timesec);
 
@@ -41,6 +47,11 @@ public class LevelManager : Node2D
     }
     public void LevelWon()
     {
+        levelWon = true;
         GD.Print("LevelWon");
+    }
+    public static void GameOver()
+    {
+        GD.Print("you have lost the game");
     }
 }

@@ -30,9 +30,9 @@ func CreateMap():
 	Grids["sand"] = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,1)
 	# Create patchy Grass on map
 	layers[0].clear()
-	Grids["grass"] = RandomizedMap([-1,0])
+	Grids["grass"] = RandomizedMap([1,0])
 	for i in range(2):
-		Grids["grass"] = CellularAutomata(Grids["grass"],-1)
+		Grids["grass"] = CellularAutomata(Grids["grass"],1)
 
 	# place Trees on Grass
 	var treeGrids:Array
@@ -117,16 +117,18 @@ func CreateCabin(grids:Array,pos:Vector2,size:Vector2):
 		for j in size.y:
 			var x = i+pos.x
 			var y = j+pos.y
-			Grids["grass"][x][y] = 5
 			Grids["treeTrunk"][x][y] = -1
 			Grids["treeLeafs"][x][y-1] = -1
 			
+			Grids["grass"][x][y] = 5
 			if (randi()%10 == 0):
 				continue
 			if(i == 0 or i==size.x-1):
 				Grids["treeTrunk"][x][y] = 6
+				Grids["grass"][x][y] = -1
 			elif(j == 0 or j==size.y-1):
 				Grids["treeTrunk"][x][y] = 6
+				Grids["grass"][x][y] = -1
 	return result
 	
 func CreateMapBoarder():
