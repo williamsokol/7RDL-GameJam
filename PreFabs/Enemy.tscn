@@ -103,6 +103,7 @@ pathToPlayer = NodePath("../../Player")
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Attack"
+frame = 4
 playing = true
 script = ExtResource( 4 )
 enemyPath = NodePath("..")

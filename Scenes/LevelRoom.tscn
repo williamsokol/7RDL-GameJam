@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Art/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scripts/LevelGen/TileMap.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://PreFabs/Enemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Gameplay/Player/HP ProgressBar.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Gameplay/Enemies/EnemyManager.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/MenuScenes/GameOver.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/MenuScenes/Ending.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.894118, 0.168627, 0.168627, 1 )
@@ -39,6 +41,8 @@ script = ExtResource( 4 )
 countDownDuration = 10
 enemyManagerPath = NodePath("EnemyManager Node2D")
 playerPath = NodePath("Player")
+GameOverScene = ExtResource( 11 )
+GameEndingScene = ExtResource( 12 )
 
 [node name="TileMaps" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -81,7 +85,7 @@ _maxVelocity = 50.0
 shootDelay = 500.0
 
 [node name="AnimatedSprite" parent="Player" index="0"]
-frame = 4
+frame = 1
 
 [node name="Gun Sprite" parent="Player" index="3"]
 rotation = 2.7646

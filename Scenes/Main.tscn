@@ -1,8 +1,56 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Menus/Main.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/MainMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/LevelRoom.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Art/Fonts/HoverMenu_dynamicfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Art/UI/UI_Pixel.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Menus/MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Menus/MenuLabels.gd" type="Script" id=6]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.490196 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0.686275 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.392157 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="PackedScene" id=6]
+_bundled = {
+"conn_count": 1,
+"conns": PoolIntArray( 6, 0, 50, 49, 2, 0 ),
+"editable_instances": [  ],
+"names": PoolStringArray( "MainMenu", "anchor_right", "anchor_bottom", "margin_right", "margin_bottom", "script", "gameScene", "Control", "TextureRect", "mouse_filter", "texture", "expand", "__meta__", "MarginContainer", "custom_constants/margin_right", "custom_constants/margin_top", "custom_constants/margin_left", "custom_constants/margin_bottom", "VBoxContainer", "margin_left", "margin_top", "size_flags_horizontal", "size_flags_vertical", "custom_constants/separation", "alignment", "Play Button", "custom_fonts/font", "custom_styles/hover", "custom_styles/pressed", "custom_styles/normal", "icon_align", "Button", "Play Label", "focus_mode", "custom_colors/font_color", "custom_colors/font_color_shadow", "custom_constants/shadow_offset_x", "custom_constants/shadow_offset_y", "text", "align", "valign", "hoveredButtonP", "nonHoveredButtonP", "Label", "MarginContainer2", "Options Button", "Options Label", "MarginContainer3", "Credits Button", "_on_Play_Button_button_down", "button_down" ),
+"node_count": 14,
+"node_paths": [  ],
+"nodes": PoolIntArray( -1, -1, 7, 0, -1, 6, 1, 0, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 0, 0, 0, 8, 8, -1, 6, 3, 5, 4, 6, 9, 7, 10, 8, 11, 9, 12, 10, 0, 0, 0, 13, 13, -1, 6, 3, 5, 4, 6, 14, 11, 15, 12, 16, 11, 17, 13, 0, 2, 0, 18, 18, -1, 4, 19, 14, 20, 15, 3, 16, 4, 17, 0, 3, 0, 18, 18, -1, 6, 3, 18, 4, 15, 21, 19, 22, 19, 23, 20, 24, 21, 0, 4, 0, 13, 13, -1, 6, 3, 18, 4, 22, 21, 19, 22, 19, 14, 13, 16, 13, 0, 5, 0, 31, 25, -1, 11, 19, 23, 3, 24, 4, 22, 21, 19, 22, 19, 26, 25, 27, 26, 28, 27, 29, 28, 30, 21, 12, 29, 0, 6, 0, 43, 32, -1, 16, 1, 0, 2, 0, 33, 30, 9, 21, 22, 31, 34, 32, 35, 33, 36, 34, 37, 34, 26, 25, 38, 35, 39, 21, 40, 21, 5, 36, 41, 37, 42, 38, 0, 4, 0, 13, 44, -1, 7, 20, 39, 3, 18, 4, 40, 21, 19, 22, 19, 14, 13, 16, 13, 0, 8, 0, 31, 45, -1, 11, 19, 23, 3, 24, 4, 22, 33, 7, 21, 19, 22, 19, 26, 25, 27, 26, 28, 27, 29, 28, 30, 21, 0, 9, 0, 43, 46, -1, 12, 1, 0, 2, 0, 9, 21, 34, 41, 26, 25, 38, 42, 39, 21, 40, 21, 5, 36, 12, 43, 41, 44, 42, 37, 0, 4, 0, 13, 47, -1, 7, 20, 45, 3, 18, 4, 15, 21, 19, 22, 19, 14, 13, 16, 13, 0, 11, 0, 31, 48, -1, 11, 19, 23, 3, 24, 4, 22, 21, 19, 22, 19, 26, 25, 27, 26, 28, 27, 29, 28, 30, 21, 12, 46, 0, 12, 0, 43, 43, -1, 12, 1, 0, 2, 0, 9, 21, 34, 41, 26, 25, 38, 47, 39, 21, 40, 21, 5, 36, 12, 48, 41, 44, 42, 38, 0 ),
+"variants": [ 1.0, -1024.0, -600.0, ExtResource( 5 ), ExtResource( 2 ), 1024.0, 600.0, 0, ExtResource( 4 ), true, {
+"_editor_description_": ""
+}, 200, 250, 100, 200.0, 250.0, 824.0, 500.0, 624.0, 3, 20, 1, 70.0, 100.0, 524.0, ExtResource( 3 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), {
+"_editor_description_": ""
+}, 2, 5, Color( 0.611765, 0.380392, 0.227451, 1 ), Color( 0.345098, 0.113725, 0.0901961, 1 ), 4, "Play", ExtResource( 6 ), NodePath("."), NodePath("../../../MarginContainer2/Options Button/Options Label"), 90.0, 160.0, Color( 0, 0, 0, 1 ), "Options", {
+"_editor_description_": ""
+}, NodePath("../../../MarginContainer/Play Button/Play Label"), 180.0, {
+"_editor_description_": ""
+}, "Credits", {
+"_editor_description_": ""
+} ],
+"version": 2
+}
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
-startScene = ExtResource( 2 )
+startScene = SubResource( 6 )

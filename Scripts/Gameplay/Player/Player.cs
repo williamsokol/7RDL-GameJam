@@ -22,11 +22,13 @@ public class Player : KinematicBody2D
     public float _mouseAngle;
     float _lastTimeShot = 0;
     public bool playerDisabled = false;
+
     #region Godot Methods
     public override void _Ready()
     {
         _velocityLabel = GetNode<Label>("Debug/Velocity");
         _mouseLine = GetNode<Line2D>("Debug/MouseLine");
+
 
         _hp = maxHp;
     }
@@ -136,7 +138,7 @@ public class Player : KinematicBody2D
         _hp = _hp - dmg;
         if (_hp <= 0)
         {
-            LevelManager.GameOver();
+            LevelManager.instance.GameOver();
         }
     }
 }
