@@ -3,12 +3,13 @@
 extends Node
 
 var currentOpenScene:Node
-export var startScene:PackedScene
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-	LoadScene(startScene)
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -16,9 +17,10 @@ func _ready():
 func ResetLevel():
 	yield(get_tree().create_timer(2.0), "timeout")
 	print("test")
-	LoadScene(startScene)
+	LoadScene(currentOpenScene)
 	pass
 func LoadScene(scene):
+#	
 	if(currentOpenScene != null):
 		currentOpenScene.queue_free()
 	
@@ -26,4 +28,10 @@ func LoadScene(scene):
 	add_child(instance)
 	
 	currentOpenScene = instance
-		
+	
+func TransitionScene(scene):
+	var animPlayer = SceneTransistion.get_node("AnimationPlayer")
+	animPlayer.play("dissolve")
+	yield(animPlayer,"animation_finished")
+	LoadScene(scene)
+	animPlayer.play_backwards("dissolve")

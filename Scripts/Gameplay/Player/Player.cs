@@ -10,7 +10,7 @@ public class Player : KinematicBody2D
     [Export] private float _hp;
     [Export] public readonly float maxHp;
 
-
+    [Export] public float shootDelay;
     // Debug Stuff
     private Label _velocityLabel;
     private Line2D _mouseLine;
@@ -20,7 +20,8 @@ public class Player : KinematicBody2D
     public Vector2 velocity = Vector2.Zero;
     private Vector2 _mouseDirection = Vector2.Zero;
     public float _mouseAngle;
-
+    float _lastTimeShot = 0;
+    public bool playerDisabled = false;
     #region Godot Methods
     public override void _Ready()
     {
@@ -32,6 +33,11 @@ public class Player : KinematicBody2D
 
     public override void _Process(float delta)
     {
+        if (playerDisabled == true)
+        {
+            velocity = Vector2.Zero;
+            return;
+        }
         FetchInput();
         CalculateVelocity();
         _mouseAngle = CalculateMouseAngle();
@@ -54,8 +60,9 @@ public class Player : KinematicBody2D
         _inputVector.y = Input.IsActionPressed("MoveUp") ? -1.0f : _inputVector.y;
         _inputVector.y = Input.IsActionPressed("MoveDown") ? 1.0f : _inputVector.y;
 
-        if (Input.IsActionJustPressed("Fire"))
+        if (Input.IsActionPressed("Fire") && (Time.GetTicksMsec() - _lastTimeShot > shootDelay))
         {
+            _lastTimeShot = Time.GetTicksMsec();
             FireProjectile();
         }
     }
@@ -64,6 +71,8 @@ public class Player : KinematicBody2D
 
     private void FireProjectile()
     {
+
+
         Projectile p = _projectile.Instance<Projectile>();
 
         p.Init(Position + (_mouseDirection.Normalized() * 10.0f), CalculateMouseAngle());

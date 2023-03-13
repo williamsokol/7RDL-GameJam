@@ -3,19 +3,26 @@ using System;
 
 public class LevelManager : Node2D
 {
-    [Export]
-    public Vector2 mapSize;
-    [Export]
-    public int countDownDuration;
-    [Export]
-    public string countDownTime;
+    [Export] public Vector2 mapSize;
+    [Export] public int countDownDuration;
+    [Export] public string countDownTime;
+    [Export] public NodePath enemyManagerPath;
+    public Node2D enemyManager;
+    [Export] public NodePath playerPath;
+    public Node2D player;
 
     public static bool levelWon = false;
-
+    public static bool gameOver = false;
+    //public GDScript Enemy = ResourceLoader.Load<GDScript>("res://Scripts/Gameplay/Enemies/Enemy.gd");
     float startingTime;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        if (enemyManagerPath != null)
+            enemyManager = (Node2D)GetNode(enemyManagerPath);
+        if (playerPath != null)
+            player = (Node2D)GetNode(playerPath);
+        //Enemy a = 1;
         mapSize = GetViewportRect().Size;
         GD.Print("ready");
         startingTime = Time.GetTicksMsec();
@@ -34,7 +41,11 @@ public class LevelManager : Node2D
 
         if (countDown <= 0)
         {
-            LevelWon();
+            if (enemyManager != null)
+            {
+                LevelWon();
+
+            }
         }
         else
         {
@@ -49,9 +60,17 @@ public class LevelManager : Node2D
     {
         levelWon = true;
         GD.Print("LevelWon");
+        enemyManager.Call("StopEnemies");
+        player.Set("playerDisabled", true);
+
     }
     public static void GameOver()
     {
+        if (gameOver == true)
+        {
+            return;
+        }
+        gameOver = true;
         GD.Print("you have lost the game");
     }
 }

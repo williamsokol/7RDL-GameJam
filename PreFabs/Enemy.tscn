@@ -84,10 +84,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 14 )
+extents = Vector2( 7.5, 7 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 12, 15 )
+extents = Vector2( 10, 12.5 )
 
 [node name="Enemy KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -97,12 +97,12 @@ __meta__ = {
 }
 speed = 30.0
 maxHp = 20.0
+attackDelay = 1.0
 pathToPlayer = NodePath("../../Player")
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Attack"
-frame = 5
 playing = true
 script = ExtResource( 4 )
 enemyPath = NodePath("..")
@@ -112,22 +112,26 @@ visible = false
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2( -0.5, 7 )
 shape = SubResource( 1 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 10.0
+path_desired_distance = 15.0
 avoidance_enabled = true
 radius = 100.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="NavTimer" type="Timer" parent="."]
 wait_time = 0.2
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 autostart = true
 
 [node name="HitBox Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox Area2D"]
-visible = false
+position = Vector2( 0, 2.5 )
 shape = SubResource( 3 )
 
 [connection signal="area_entered" from="HitBox Area2D" to="." method="_on_HitBox_Area2D_area_entered"]

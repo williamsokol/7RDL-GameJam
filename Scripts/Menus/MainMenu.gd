@@ -16,6 +16,6 @@ func _ready():
 
 
 func _on_Play_Button_button_down():
-	gameManager.LoadScene(gameScene)
+	gameManager.TransitionScene(gameScene)
 
 	

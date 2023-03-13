@@ -16,5 +16,6 @@ func _process(delta):
 	rotation_degrees = player._mouseAngle-90
 	
 	flip_v = position.x<0
+	visible = !player.playerDisabled
 	
 

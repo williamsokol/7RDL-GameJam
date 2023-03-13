@@ -36,7 +36,9 @@ font_data = ExtResource( 6 )
 
 [node name="LevelManager" type="Node2D"]
 script = ExtResource( 4 )
-countDownDuration = 5
+countDownDuration = 10
+enemyManagerPath = NodePath("EnemyManager Node2D")
+playerPath = NodePath("Player")
 
 [node name="TileMaps" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -76,6 +78,7 @@ __meta__ = {
 "_edit_group_": true
 }
 _maxVelocity = 50.0
+shootDelay = 500.0
 
 [node name="AnimatedSprite" parent="Player" index="0"]
 frame = 4
@@ -96,6 +99,10 @@ levelManagerPath = NodePath("..")
 [node name="UI Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -21.0
+margin_top = -4.0
+margin_right = -21.0
+margin_bottom = -4.0
 
 [node name="HP ProgressBar" type="ProgressBar" parent="CanvasLayer/UI Control"]
 anchor_top = 1.0
@@ -127,12 +134,6 @@ levelManagerPath = NodePath("../../..")
 script = ExtResource( 10 )
 playerPath = NodePath("../Player")
 enemy = ExtResource( 8 )
-
-[node name="Enemy KinematicBody2D" parent="EnemyManager Node2D" instance=ExtResource( 8 )]
-position = Vector2( 453, 289 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Timer" type="Timer" parent="EnemyManager Node2D"]
 autostart = true

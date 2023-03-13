@@ -5,7 +5,7 @@
 [ext_resource path="res://Scripts/LevelGen/Temp.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/LevelGen/LevelManager.cs" type="Script" id=4]
 
-[node name="LevelManager" type="Node2D"]
+[node name="LevelManager2" type="Node2D"]
 script = ExtResource( 4 )
 mapSize = Vector2( 3072, 1800 )
 

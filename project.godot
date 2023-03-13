@@ -11,8 +11,14 @@ config_version=4
 [application]
 
 config/name="7drl-GameJam"
-run/main_scene="res://Scenes/GameManager.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+SceneTransistion="*res://Scenes/SceneTransistion.tscn"
+GameManager="*res://Scenes/GameManager.tscn"
+MenuManager="*res://Scenes/MenuManager.tscn"
 
 [debug]
 
