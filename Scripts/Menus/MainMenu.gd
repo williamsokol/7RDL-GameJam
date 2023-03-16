@@ -14,8 +14,3 @@ func _ready():
 		print(gameManager)
 
 
-
-func _on_Play_Button_button_down():
-	gameManager.TransitionScene(gameScene)
-
-	

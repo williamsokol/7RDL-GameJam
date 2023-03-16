@@ -12,6 +12,11 @@ var tween:SceneTreeTween
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	
+	# reset world environment
+	environment.adjustment_brightness = 1
+	environment.adjustment_contrast = 1
+	
 	tween = create_tween()
 	var node_path = NodePath(".:environment:adjustment_brightness")
 	# This will be parsed as a node path to the "x" component of the "position" property in the current node.

@@ -3,6 +3,7 @@ extends AudioStreamPlayer
 
 # settings
 export var musicVolume:float 
+export var sfxVolume:float
 export var Tracks :Dictionary = {
 	"res://Scenes/LevelRoom.tscn":"res://Music-Sounds/forest.mp3",
 	"res://Scenes/Main.tscn":"res://Music-Sounds/demo_V2.mp3"

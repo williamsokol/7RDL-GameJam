@@ -26,7 +26,7 @@ func ShowMenu(MenuName):
 func _on_TryAain_Button_button_down():
 	pass # Replace with function body.
 	GameManager.TransitionScene(levelRoomScene)
-
+	get_node("MainMenu/AudioStreamPlayer").play()
 
 func _on_Back_Button_to_menu_button_down():
 	GameManager.TransitionScene(mainMenuScene)
@@ -36,3 +36,18 @@ func _on_Back_Button_to_menu_button_down():
 func _on_Credits_Button_button_down():
 	GameManager.TransitionScene(CreditsScene)
 	pass # Replace with function body.
+
+
+func _on_Music_Slider_value_changed(value):
+	MusicManager.musicVolume = range_lerp(value, 0,100,-10,10)
+	if MusicManager.musicVolume < -9:
+		MusicManager.musicVolume = -80
+	MusicManager.volume_db = MusicManager.musicVolume
+
+
+func _on_Options_Back_button_down():
+	$"Options Control".visible = false
+
+
+func _on_Options_button_down():
+	$"Options Control".visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/LevelRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Fonts/HoverMenu_dynamicfont.tres" type="DynamicFont" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Art/UI/Menu/UpgradePopUp.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Main.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/MenuScenes/CreditsScene.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Music-Sounds/SFX/menu/startgame.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Art/UI/Menu/Options V1.png" type="Texture" id=14]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 0.490196 )
@@ -41,6 +43,35 @@ font_data = ExtResource( 8 )
 [sub_resource type="DynamicFont" id=6]
 size = 30
 font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 0.490196 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0, 0, 0.686275 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0, 0, 0, 0.392157 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="MenuManager" type="Control"]
 anchor_right = 1.0
@@ -210,6 +241,9 @@ __meta__ = {
 }
 hoveredButtonP = NodePath("../../../MarginContainer/Play Button/Play Label")
 nonHoveredButtonP = NodePath("../../../MarginContainer2/Options Button/Options Label")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MainMenu"]
+stream = ExtResource( 13 )
 
 [node name="UpgradeMenu Control" type="Control" parent="."]
 visible = false
@@ -466,8 +500,103 @@ __meta__ = {
 hoveredButtonP = NodePath("../../../../MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Play Button/Play Label")
 nonHoveredButtonP = NodePath(".")
 
+[node name="Options Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect2" type="TextureRect" parent="Options Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 14 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Options Control/TextureRect2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 300.0
+margin_top = 200.0
+margin_right = -300.0
+margin_bottom = -150.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Options Control/TextureRect2/MarginContainer"]
+margin_right = 424.0
+margin_bottom = 250.0
+
+[node name="Settings Label" type="Label" parent="Options Control/TextureRect2/MarginContainer/VBoxContainer2"]
+margin_right = 424.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 7 )
+text = "Settings"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options Control/TextureRect2/MarginContainer/VBoxContainer2"]
+margin_top = 44.0
+margin_right = 424.0
+margin_bottom = 75.0
+custom_constants/separation = 38
+alignment = 1
+
+[node name="Music Label" type="Label" parent="Options Control/TextureRect2/MarginContainer/VBoxContainer2/VBoxContainer"]
+margin_right = 424.0
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 2 )
+text = "Music"
+
+[node name="Music Slider" type="HSlider" parent="Options Control/TextureRect2/MarginContainer/VBoxContainer2/VBoxContainer/Music Label"]
+margin_right = 424.0
+margin_bottom = 70.0
+
+[node name="Music Label2" type="Label" parent="Options Control/TextureRect2/MarginContainer/VBoxContainer2/VBoxContainer"]
+visible = false
+margin_top = 69.0
+margin_right = 424.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 2 )
+text = "Sounds"
+
+[node name="Sound HSlider" type="HSlider" parent="Options Control/TextureRect2/MarginContainer/VBoxContainer2/VBoxContainer/Music Label2"]
+margin_right = 424.0
+margin_bottom = 70.0
+
+[node name="Back Button" type="Button" parent="Options Control/TextureRect2"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -151.0
+margin_top = -122.0
+margin_right = 151.0
+margin_bottom = -50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
+icon_align = 1
+
+[node name="Back Label" type="Label" parent="Options Control/TextureRect2/Back Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+align = 1
+valign = 1
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": ""
+}
+hoveredButtonP = NodePath("../../../../MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Play Button/Play Label")
+nonHoveredButtonP = NodePath(".")
+
 [connection signal="button_down" from="MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Play Button" to="." method="_on_TryAain_Button_button_down"]
+[connection signal="button_down" from="MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/Options Button" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Credits Button" to="." method="_on_Credits_Button_button_down"]
 [connection signal="button_down" from="GameOverMenu/MarginContainer2/TryAain Button" to="." method="_on_TryAain_Button_button_down"]
 [connection signal="button_down" from="CreditsMenu/MarginContainer2/Back Button" to="." method="_on_Back_Button_to_menu_button_down"]
 [connection signal="button_down" from="EndingMenu/MarginContainer2/Back Button" to="." method="_on_Back_Button_to_menu_button_down"]
+[connection signal="value_changed" from="Options Control/TextureRect2/MarginContainer/VBoxContainer2/VBoxContainer/Music Label/Music Slider" to="." method="_on_Music_Slider_value_changed"]
+[connection signal="button_down" from="Options Control/TextureRect2/Back Button" to="." method="_on_Options_Back_button_down"]

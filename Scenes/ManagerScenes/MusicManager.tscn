@@ -7,4 +7,3 @@
 stream = ExtResource( 1 )
 autoplay = true
 script = ExtResource( 2 )
-musicVolume = -5.0

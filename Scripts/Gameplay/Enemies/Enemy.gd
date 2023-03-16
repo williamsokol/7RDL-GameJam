@@ -9,6 +9,7 @@ export var attackDelay:float
 
 # references
 export var pathToPlayer:NodePath
+export var deathParticle:PackedScene
 onready var _player :Node2D
 onready var spriteAnimator := $CanvasLayer/AnimatedSprite
 onready var canvasLayer :CanvasLayer= $CanvasLayer
@@ -89,6 +90,9 @@ func TakeDamage(dmg):
 func die():
 	if(enemyManager != null):
 		enemyManager.enemyList.erase(self)
+	var instance = deathParticle.instance()
+	enemyManager.add_child(instance)
+	instance.position = position
 	queue_free()
 
 

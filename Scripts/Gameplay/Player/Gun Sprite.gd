@@ -10,7 +10,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 #	Vector2.ZERO.normalized()
 	position = player._mouseDirection.normalized() * distFromPlayer
 	rotation_degrees = player._mouseAngle-90

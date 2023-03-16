@@ -85,7 +85,7 @@ public class LevelManager : Node2D
         enemyManager.Call("StopEnemies");
         player.Set("playerDisabled", true);
 
-        await ToSignal(GetTree().CreateTimer(2), "timeout");
+        await ToSignal(GetTree().CreateTimer(4), "timeout");
         var gameManager = (Node)GetNode("/root/GameManager");
         gameManager.Call("TransitionScene", GameEndingScene);
 

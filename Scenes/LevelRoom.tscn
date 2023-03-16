@@ -12,7 +12,7 @@
 [ext_resource path="res://Scripts/Gameplay/Enemies/EnemyManager.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/MenuScenes/GameOver.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/MenuScenes/Ending.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/WorldEnvironment.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Gameplay/WorldEnvironment.gd" type="Script" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.894118, 0.168627, 0.168627, 1 )
@@ -57,7 +57,7 @@ follow_viewport_enable = true
 [node name="TileMaps" type="Node2D" parent="CanvasLayer2"]
 script = ExtResource( 2 )
 levelManagerPath = NodePath("../..")
-layers = [ NodePath("TileMap(Grass)"), NodePath("TileMap2(Sand)"), NodePath("TileMap3(Treetrunks)"), NodePath("CanvasLayer3/TileMap4(leafs)") ]
+layersPath = [ NodePath("TileMap(Grass)"), NodePath("TileMap2(Sand)"), NodePath("TileMap3(Treetrunks)"), NodePath("CanvasLayer3/TileMap4(leafs)") ]
 
 [node name="TileMap(Grass)" type="TileMap" parent="CanvasLayer2/TileMaps"]
 tile_set = ExtResource( 1 )
@@ -98,10 +98,9 @@ __meta__ = {
 }
 _maxVelocity = 50.0
 shootDelay = 500.0
-invincible = true
 
 [node name="Animations AnimatedSprite" parent="Player" index="0"]
-frame = 2
+frame = 3
 
 [node name="Gun Sprite" parent="Player" index="3"]
 rotation = 2.7646

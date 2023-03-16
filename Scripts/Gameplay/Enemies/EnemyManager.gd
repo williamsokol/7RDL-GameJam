@@ -24,7 +24,7 @@ func StopEnemies():
 	for e in enemyList:
 		e.speed = 0
 	
-	var deathAnimTick = .4
+	var deathAnimTick = 4/enemyList.size()
 	while (enemyList.size() > 0):
 		yield(get_tree().create_timer(deathAnimTick), "timeout")
 		

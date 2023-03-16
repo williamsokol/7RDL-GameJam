@@ -11,5 +11,5 @@ dest_files=[ "res://.import/startgame.mp3-a5624ecb6643e3dc657f1207c2f2cdd2.mp3st
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

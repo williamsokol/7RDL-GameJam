@@ -5,8 +5,8 @@ export var levelManagerPath:NodePath
 var mapSize:Vector2
 var mapTileSize:Vector2
 
-export (Array,NodePath) var layers = []
-
+export (Array,NodePath) var layersPath = []
+var layers = []
 var Grids = {} #make a diction for grids
 
 # Called when the node enters the scene tree for the first time.
@@ -15,8 +15,9 @@ func _ready():
 	yield(levelManager, "ready") # needed to make this the last ready() func called
 	randomize()
 	#layers = get_children()
-	for layer in layers.size():
-		layers[layer] = get_node(layers[layer])
+	for i in layersPath.size():
+		print(get_node(layersPath[i]))
+		layers.append( get_node(layersPath[i]) )
 	
 	print("tilemaps loading")
 	mapSize = levelManager.mapSize
@@ -38,7 +39,7 @@ func CreateMap():
 
 	# place Trees on Grass
 	var treeGrids:Array
-	treeGrids = placeTrees(Grids["grass"],[3])
+	treeGrids = placeTrees(Grids["grass"])
 	Grids["treeTrunk"] = treeGrids[0]
 	Grids["treeLeafs"] = treeGrids[1]
 	
@@ -95,7 +96,7 @@ func clearSingleTiles(tileGrid,targetTile):
 				tempGrid[x][y] = -1
 	return tempGrid
 	
-func placeTrees(tileGrid:Array,tiles:Array):
+func placeTrees(tileGrid:Array):
 	var trunkGrid = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,-1)
 	var leafGrid  = create_2d_array(mapTileSize.y+1,mapTileSize.x+1,-1)
 	var result = [trunkGrid,leafGrid]
