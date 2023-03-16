@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/load_bow.mp3-519a801027d9518b341bf0701e9f1ff9.mp3str"
+
+[deps]
+
+source_file="res://Music-Sounds/SFX/weapons/bow/load_bow.mp3"
+dest_files=[ "res://.import/load_bow.mp3-519a801027d9518b341bf0701e9f1ff9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

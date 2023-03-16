@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/load_sgu.mp3-721db80299bbbc805e01266ad6b53a5d.mp3str"
+
+[deps]
+
+source_file="res://Music-Sounds/SFX/weapons/shotgun/load_sgu.mp3"
+dest_files=[ "res://.import/load_sgu.mp3-721db80299bbbc805e01266ad6b53a5d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

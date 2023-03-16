@@ -15,7 +15,7 @@ func HideMenus():
 		menu.visible = false
 func ShowMenu(MenuName):
 	var selectedMenu:Control = get_node(MenuName)
-	
+	print("ran this: " + str(selectedMenu.visible))
 	selectedMenu.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

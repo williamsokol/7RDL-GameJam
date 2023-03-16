@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/boss_bul_shoot.mp3-44e77df403e0b03a8f4518d1bee90edb.mp3str"
+
+[deps]
+
+source_file="res://Music-Sounds/SFX/weapons/enemies/boss_bul_shoot.mp3"
+dest_files=[ "res://.import/boss_bul_shoot.mp3-44e77df403e0b03a8f4518d1bee90edb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/enemy_bul_shoot.mp3-416587a79b8773eae05520d0ecab94a4.mp3str"
+
+[deps]
+
+source_file="res://Music-Sounds/SFX/weapons/enemies/enemy_bul_shoot.mp3"
+dest_files=[ "res://.import/enemy_bul_shoot.mp3-416587a79b8773eae05520d0ecab94a4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

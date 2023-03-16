@@ -5,7 +5,8 @@ export var levelManagerPath:NodePath
 var mapSize:Vector2
 var mapTileSize:Vector2
 
-var layers = []
+export (Array,NodePath) var layers = []
+
 var Grids = {} #make a diction for grids
 
 # Called when the node enters the scene tree for the first time.
@@ -13,8 +14,9 @@ func _ready():
 	var levelManager = get_node(levelManagerPath)
 	yield(levelManager, "ready") # needed to make this the last ready() func called
 	randomize()
-	layers = get_children()
-	
+	#layers = get_children()
+	for layer in layers.size():
+		layers[layer] = get_node(layers[layer])
 	
 	print("tilemaps loading")
 	mapSize = levelManager.mapSize

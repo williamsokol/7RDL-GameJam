@@ -20,6 +20,7 @@ SceneTransistion="*res://Scenes/ManagerScenes/SceneTransistion.tscn"
 GameManager="*res://Scenes/ManagerScenes/GameManager.tscn"
 MenuManager="*res://Scenes/ManagerScenes/MenuManager.tscn"
 MusicManager="*res://Scenes/ManagerScenes/MusicManager.tscn"
+Custom="*res://Custom.cs"
 
 [debug]
 

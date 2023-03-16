@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/Gameplay/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://PreFabs/Projectile.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Art/Units/WeaponLess_SpreiteSheet.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Gameplay/Player/PlayerAnimator.gd" type="Script" id=5]
 [ext_resource path="res://Art/Units/Pistol.png" type="Texture" id=6]
+[ext_resource path="res://Music-Sounds/SFX/weapons/pistol/shoot_pis.mp3" type="AudioStream" id=7]
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 4 )
@@ -84,19 +85,53 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
 
-[node name="Player" type="KinematicBody2D"]
+[sub_resource type="Animation" id=23]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "TakeDmg"
+length = 0.8
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.14, 0.24, 0.36, 0.49, 0.62, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
 script = ExtResource( 1 )
 _acceleration = 800.0
 _maxVelocity = 300.0
 _drag = 500.0
 _debugInfo = true
-_projectile = ExtResource( 2 )
 maxHp = 80.0
+_projectile = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Animations AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 6 )
 animation = "Down"
+frame = 5
 playing = true
 script = ExtResource( 5 )
 playerPath = NodePath("..")
@@ -128,3 +163,12 @@ texture = ExtResource( 6 )
 script = ExtResource( 3 )
 distFromPlayer = 5.0
 playerPath = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 23 )
+anims/TakeDmg = SubResource( 24 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -3.0
+pitch_scale = 3.71

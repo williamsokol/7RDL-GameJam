@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/enemy_bul_charge.mp3-8cb237617e48f00f39f333ee84efda58.mp3str"
+
+[deps]
+
+source_file="res://Music-Sounds/SFX/weapons/enemies/enemy_bul_charge.mp3"
+dest_files=[ "res://.import/enemy_bul_charge.mp3-8cb237617e48f00f39f333ee84efda58.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

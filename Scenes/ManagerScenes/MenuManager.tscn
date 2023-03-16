@@ -466,7 +466,7 @@ __meta__ = {
 hoveredButtonP = NodePath("../../../../MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Play Button/Play Label")
 nonHoveredButtonP = NodePath(".")
 
-[connection signal="button_down" from="MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Play Button" to="MainMenu" method="_on_Play_Button_button_down"]
+[connection signal="button_down" from="MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Play Button" to="." method="_on_TryAain_Button_button_down"]
 [connection signal="button_down" from="MainMenu/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer3/Credits Button" to="." method="_on_Credits_Button_button_down"]
 [connection signal="button_down" from="GameOverMenu/MarginContainer2/TryAain Button" to="." method="_on_TryAain_Button_button_down"]
 [connection signal="button_down" from="CreditsMenu/MarginContainer2/Back Button" to="." method="_on_Back_Button_to_menu_button_down"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/enemy_hurt.mp3-7420541489f7f3af5fe6c2486b417c7c.mp3str"
+
+[deps]
+
+source_file="res://Music-Sounds/SFX/hurt/enemy_hurt.mp3"
+dest_files=[ "res://.import/enemy_hurt.mp3-7420541489f7f3af5fe6c2486b417c7c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -6,12 +6,19 @@ public class Player : KinematicBody2D
     [Export] private readonly float _maxVelocity;
     [Export] private readonly float _drag;
     [Export] private readonly bool _debugInfo;
-    [Export] private readonly PackedScene _projectile;
-    [Export] private float _hp;
+    // Settings
     [Export] public readonly float maxHp;
-
     [Export] public float shootDelay;
+
+    //References
+    [Export] private readonly PackedScene _projectile;
+    private AudioStreamPlayer _shootSFX;
+
+    // Globals
+    [Export] private float _hp;
+
     // Debug Stuff
+    [Export] public bool invincible;
     private Label _velocityLabel;
     private Line2D _mouseLine;
     // -----------
@@ -26,6 +33,7 @@ public class Player : KinematicBody2D
     #region Godot Methods
     public override void _Ready()
     {
+        _shootSFX = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         _velocityLabel = GetNode<Label>("Debug/Velocity");
         _mouseLine = GetNode<Line2D>("Debug/MouseLine");
 
@@ -74,7 +82,7 @@ public class Player : KinematicBody2D
     private void FireProjectile()
     {
 
-
+        _shootSFX.Play();
         Projectile p = _projectile.Instance<Projectile>();
 
         p.Init(Position + (_mouseDirection.Normalized() * 10.0f), CalculateMouseAngle());
@@ -133,12 +141,20 @@ public class Player : KinematicBody2D
 
     //     _mouseAngle
     // }
-    public void reciveDmg(float dmg)
+    public async void reciveDmg(float dmg)
     {
+        if (invincible)
+        {
+            return;
+        }
+        AnimationPlayer anim = (AnimationPlayer)GetNode("AnimationPlayer");
+        anim.Play("TakeDmg");
         _hp = _hp - dmg;
         if (_hp <= 0)
         {
             LevelManager.instance.GameOver();
         }
+        await ToSignal(anim, "animation_finished");
+
     }
 }

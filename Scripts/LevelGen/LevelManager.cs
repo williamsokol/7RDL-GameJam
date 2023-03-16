@@ -3,9 +3,10 @@ using System;
 
 public class LevelManager : Node2D
 {
+    // Settings
     [Export] public Vector2 mapSize;
-    [Export] public int countDownDuration;
-    [Export] public string countDownTime;
+
+    // References
     [Export] public NodePath enemyManagerPath;
     public Node2D enemyManager;
     [Export] public NodePath playerPath;
@@ -13,8 +14,12 @@ public class LevelManager : Node2D
     [Export] public PackedScene GameEndingScene;
     public Node2D player;
 
+    // Globals
+    [Export] public int countDownDuration;
+    [Export] public string countDownTime;
     public static bool levelWon = false;
     public static bool gameOver = false;
+    public float countDown;
 
     public static LevelManager instance;
     //public GDScript Enemy = ResourceLoader.Load<GDScript>("res://Scripts/Gameplay/Enemies/Enemy.gd");
@@ -50,7 +55,7 @@ public class LevelManager : Node2D
             return;
         }
         float timesec = ((Time.GetTicksMsec() - startingTime) / 1000);
-        float countDown = (countDownDuration - timesec);
+        countDown = (countDownDuration - timesec);
 
         if (countDown <= 0)
         {

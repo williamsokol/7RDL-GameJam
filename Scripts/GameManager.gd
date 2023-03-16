@@ -2,6 +2,9 @@
 # for instance music, level loading, score, 
 extends Node
 
+# references
+
+# Globals
 var currentOpenScene:Node
 
 
@@ -17,7 +20,6 @@ func _ready():
 #	pass
 func ResetLevel():
 	yield(get_tree().create_timer(2.0), "timeout")
-	print("test")
 	LoadScene(currentOpenScene)
 	pass
 func LoadScene(scene):	
@@ -33,7 +35,12 @@ func LoadScene(scene):
 func TransitionScene(scene):
 	var animPlayer = SceneTransistion.get_node("AnimationPlayer")
 	animPlayer.play("dissolve")
+
+	MusicManager.FadeIn(0)
 	yield(animPlayer,"animation_finished")
 	MenuManager.HideMenus()
 	LoadScene(scene)
+	MusicManager.UpdateTrack()
+	
 	animPlayer.play_backwards("dissolve")
+	

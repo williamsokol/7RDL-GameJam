@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/boss_die.mp3-a7fedd4c82ccee6143e5297de68bea6e.mp3str"
+
+[deps]
+
+source_file="res://Music-Sounds/SFX/hurt/boss_die.mp3"
+dest_files=[ "res://.import/boss_die.mp3-a7fedd4c82ccee6143e5297de68bea6e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
