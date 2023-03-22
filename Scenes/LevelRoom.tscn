@@ -100,7 +100,7 @@ _maxVelocity = 50.0
 shootDelay = 500.0
 
 [node name="Animations AnimatedSprite" parent="Player" index="0"]
-frame = 3
+frame = 2
 
 [node name="Gun Sprite" parent="Player" index="3"]
 rotation = 2.7646
@@ -148,11 +148,12 @@ levelManagerPath = NodePath("../../..")
 
 [node name="EnemyManager Node2D" type="Node2D" parent="."]
 script = ExtResource( 10 )
-enemyLimit = 30
+enemyLimit = 20
 playerPath = NodePath("../Player")
 enemy = ExtResource( 8 )
 
 [node name="Timer" type="Timer" parent="EnemyManager Node2D"]
+wait_time = 2.0
 autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

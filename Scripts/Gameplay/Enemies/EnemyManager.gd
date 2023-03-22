@@ -15,6 +15,12 @@ func _ready():
 	pass # Replace with function body.
 	
 	timer.connect("timeout",self,"_on_Timer_timeout")
+	
+	yield(get_tree().create_timer(7),"timeout")
+	for i in range(10):
+		var rand = Vector2(randi()%100-50,randi()%100-50)
+		var enemyPos = player.position + rand.normalized()*100
+		SpawnEnemy(enemyPos)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
